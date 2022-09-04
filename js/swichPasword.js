@@ -1,0 +1,9 @@
+$(function(){
+	$('#form').hide();
+	$('#swichPasword').click(function(){
+		$('#form').show(2000);
+	})
+	$('#offForm').click(function(){
+		$('#form').hide(2000);
+	})
+})

@@ -1,0 +1,197 @@
+body{
+	background-color: #080808 !important;
+	font-family: 'Comfortaa', cursive !important;
+}
+p, h1, h2, h3, h4, h5, h6, label{
+	color: white;
+}
+a{
+	text-decoration: none!important;
+	color: white!important;
+}
+
+hr{
+	background-color: black !important;
+	margin: 0!important;
+	height: 4px !important;
+	opacity: 1 !important;
+}
+/*регистрация*/
+.container__registr {
+	padding-right: var(--bs-gutter-x,.75rem);
+}
+
+
+@media(min-width: 576px){
+	.h-reg-log{
+		height: 100%;
+	}
+}
+
+/*профиль*/
+.hr__verticy__left{
+	position: absolute;
+	border: 4px solid black;
+	border-top: none;
+	border-left: none;
+	border-bottom: none;
+
+	background-image: url(../img/fon-l.png);
+	background-size: cover;
+	height: 100%;
+	padding: 0 14% 0 0;
+}
+
+.hr__verticy__right{
+	position: absolute;
+	border: 4px solid black;
+	border-top: none;
+	border-right: none;
+	border-bottom: none;
+
+	background-image: url(../img/fon-r.png);
+	background-size: cover;
+	padding: 0 14% 0 0;
+	height: 100%;
+	right: 0;
+}
+
+.width__block{
+	width: 70%;
+}
+
+.float__left{
+	text-align: left;
+}
+
+.float__right{
+	text-align: right;
+}
+
+@media(max-width: 600px){
+	#border{
+		display: none;
+	}
+	.width__block{
+		width: 100%;
+	}
+}
+
+
+/*месенджер*/
+.chat {
+	border:1px solid #333;
+	width:100%;
+	height: 87vh;
+	background-color:#171624;
+	color:#fff;
+}
+
+.chat-messages {
+	min-height: 70%;
+	max-height: 85%;
+	overflow: auto;
+}
+
+.chat-messages__content {
+	padding:1px;
+}
+
+.chat__message {
+	border-left:3px solid #333;
+	margin-top:2px;
+	padding:2px;
+}
+
+.chat__message_black {
+	border-color:#000;
+}
+
+.chat__message_blue {
+	border-color:blue;
+}
+
+.chat__message_green {
+	border-color:green;
+}
+
+.chat__message_red {
+	border-color:red;
+}
+
+input {
+	vertical-align:middle;
+	background:#333;
+	color:#fff;
+	border:0;
+	display:inline-block;
+	margin:1px;
+	height:30px;
+}
+
+.chat-form__input {
+	width:79%;
+}
+
+.chat-form__submit {
+	width:18%;
+}
+/*скролл для чата*/
+
+.chat-messages::-webkit-scrollbar {
+	width: 10px;
+}
+
+.chat-messages::-webkit-scrollbar-track {
+	-webkit-box-shadow: 5px 5px 5px -5px rgba(34, 60, 80, 0.2) inset;
+	background-color: #f9f9fd;
+	border-radius: 10px;
+}
+
+.chat-messages::-webkit-scrollbar-thumb {
+	border-radius: 10px;
+	background: linear-gradient(180deg, #00c6fb, #005bea);
+}
+
+@media(max-width: 350px){
+	nav > .container-fluid > .navbar-brand{
+		font-size: 1.1rem;
+	}
+}
+
+@media(max-width: 320px){
+	nav > .container-fluid > .navbar-brand{
+		font-size: 0.9rem;
+	}
+	body > div > div > div > header > nav > div > a:nth-child(2),
+	body > header > nav > div > a:nth-child(2){
+		margin-bottom: 8px;
+	}
+}
+
+@media(max-width: 283px){
+	nav > .container-fluid > .navbar-brand{
+		font-size: 0.8rem;
+	}
+}
+/*друзья*/
+
+.w-33{
+	width: 30%;
+	max-width: 154px;
+}
+
+@media(max-width: 376px){
+	.w-33{
+		width: 70%;
+	}
+}
+
+@media(max-width: 369px){
+	button{
+		width: 100%;
+	}
+	.w-33{
+		max-width: 100%;
+	}
+}
