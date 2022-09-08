@@ -25,7 +25,7 @@
 					<header>
 						<nav class="navbar ">
 							<div class="container-fluid justify-content-start">
-								<a class="navbar-brand" href="profile.html">
+								<a class="navbar-brand" href="profile.php">
 									<p><img src="img/prof-icon.png" alt="" width="30" height="30" class="d-inline-block align-text-top">
 									Профиль</p>
 								</a>
@@ -46,7 +46,8 @@
 						<div class="d-flex justify-content-center" style="position: relative;">
 							<div id="clickButton" class=" col-12  border" style="position: absolute; background-color: #171624;">
 								<div class="d-flex justify-content-center flex-wrap">
-									<button class="btn btn-secondary m-2 me-0 w-33">Участники</button>
+									<p id="niks"></p>
+									<button id="members" class="btn btn-secondary m-2 me-0 w-33">Участники</button>
 									<button class="btn btn-success m-2 me-0 w-33">Добавить</button>
 									<button class="btn btn-danger m-2 me-0 w-33">удалить</button>
 								</div>
@@ -54,7 +55,12 @@
 						</div>
 						<div id="block" class="chat-messages">
 							<div class="chat-messages__content" id="messages">
-
+								<?php 
+								$niks = "";
+								foreach ($_SESSION['niks'] as $nik){
+									$niks = $niks . $nik . " ,";
+									}?>
+								<p style="display: none;" id="niksInSesion"><?php echo $niks;?></p>
 								<?php
 								echo "<pre>";
 									var_dump($_SESSION);
