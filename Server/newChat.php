@@ -40,3 +40,4 @@ foreach($error as $e){
 	$data = $data . "#" . $e;
 }
 echo($data);
+?>

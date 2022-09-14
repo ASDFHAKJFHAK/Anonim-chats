@@ -24,6 +24,7 @@
 					<p><img src="img/logo.png" alt="" width="30" height="30" class="d-inline-block align-text-top">
 					Сообщения</p>
 				</a>
+				<a class="navbar-brand" href="friends.php"><p>Чаты</p></a>
 			</div>
 		</nav>
 		<hr>

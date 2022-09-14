@@ -19,11 +19,11 @@
 	<header>
 		<nav class="navbar ">
 			<div class="container-fluid justify-content-start">
-				<a class="navbar-brand" href="profile.html">
+				<a class="navbar-brand" href="profile.php">
 					<p><img src="img/prof-icon.png" alt="" width="30" height="30" class="d-inline-block align-text-top">
 					Профиль</p>
 				</a>
-				<a class="navbar-brand" href="messenger.html"><p>Сообщения</p></a>
+				<a class="navbar-brand" href="messenger.php"><p>Сообщения</p></a>
 			</div>
 		</nav>
 		<hr>

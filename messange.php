@@ -30,6 +30,7 @@
 									Профиль</p>
 								</a>
 								<a class="navbar-brand" href="messange.php"><p>Сообщения</p></a>
+								<a class="navbar-brand" href="friends.php"><p>Чаты</p></a>
 							</div>
 						</nav>
 						<hr>
@@ -48,8 +49,56 @@
 								<div class="d-flex justify-content-center flex-wrap">
 									<p id="niks"></p>
 									<button id="members" class="btn btn-secondary m-2 me-0 w-33">Участники</button>
-									<button class="btn btn-success m-2 me-0 w-33">Добавить</button>
-									<button class="btn btn-danger m-2 me-0 w-33">удалить</button>
+									<button class="btn btn-success m-2 me-0 w-33" id='newChat'>Добавить</button>
+
+
+									<p id="newChat"></p>
+									<p id="sucses">Чат успешно расширен</p>
+									<p style="display: none;" id="login"><?php echo $_SESSION['login']; ?></p>
+									<form id="form2" style="max-width: 300px;" class="w-100" method="post">
+										<div id="container">
+											<div class="mb-3">
+												<label for="exampleInputPassword1" class="form-label">Никнейм участника</label>
+												<input type="text" id="user0" class="form-control" maxlength=20 placeholder="Никнейм"  required>
+											</div>
+										</div>
+										<button id="new" class="btn btn-primary mb-3 ps-4 pe-4"> + </button>
+										<button id="repeed" class="btn btn-primary mb-3 ps-4 pe-4"> - </button>
+
+										<button id="create" type="submit" class="btn btn-primary mb-3 ps-4 pe-4"> Создать </button>
+										<button id="offForm2" class="btn btn-primary mb-3 ps-4 pe-4"> Отмена </button>
+
+									</form>
+									<div id="box">
+										<form id="qwestions" method="post" action="Server/outChat.php">
+											<p>Вы точно хотите выйти из беседы?</p>
+											<button id="btnOut" type="submit" class="btn btn-primary mb-3 ps-4 pe-4"> Да </button>
+											<button id="btnRepid" class="btn btn-primary mb-3 ps-4 pe-4"> Нет </button>
+										</form>
+										<form id="formAdmin" method="post" action="Server/DelitChat.php">
+											<p>Выберите кого выгнать</p>
+											<?php
+
+											foreach($_SESSION['niks'] as $nik){
+												if($nik != $_SESSION['login']){
+													echo "<input type='checkbox' name='chek' value='{$nik}'><p>$nik</p>";
+												}
+											}
+											?>
+											
+											<button id="btnDel"  class="btn btn-primary mb-3 ps-4 pe-4"> Удалить </button>
+											<button id="allDelit" type="submit" class="btn btn-primary mb-3 ps-4 pe-4"> Удалить всю беседу </button>
+										</form>
+										<?php 
+										if ($_SESSION['admin_chat'] == true) {
+
+											echo '<button id="delit" class="btn btn-danger m-2 me-0 w-33">Удалить</button>';
+
+										} else{
+											echo '<button id="out" class="btn btn-danger m-2 me-0 w-33">Выйти из беседы</button>';
+										}
+										?>
+									</div>
 								</div>
 							</div>
 						</div>
@@ -59,11 +108,11 @@
 								$niks = "";
 								foreach ($_SESSION['niks'] as $nik){
 									$niks = $niks . $nik . " ,";
-									}?>
+								}?>
 								<p style="display: none;" id="niksInSesion"><?php echo $niks;?></p>
 								<?php
 								echo "<pre>";
-									var_dump($_SESSION);
+								var_dump($_SESSION);
 								echo "</pre>";?>
 								<p>какой то текст</p>
 								<p>какой то текст</p>
