@@ -42,7 +42,7 @@
 
 						<?php 
 						session_start();
-						if(isset($_SESSION)){
+						if(isset($_SESSION['error'])){
 							echo "<p class='text-danger'>{$_SESSION['error']}</p>";
 						}
 						?>

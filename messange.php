@@ -31,6 +31,9 @@
 								</a>
 								<a class="navbar-brand" href="messange.php"><p>Сообщения</p></a>
 								<a class="navbar-brand" href="friends.php"><p>Чаты</p></a>
+								<form method="post" action="Server/Out.php">
+									<button id="btnOut" type="submit" class="btn btn-primary mb-3 ps-4 pe-4"> Выход </button>
+								</form>
 							</div>
 						</nav>
 						<hr>
@@ -77,6 +80,7 @@
 										</form>
 										<form id="formAdmin" method="post" action="Server/DelitChat.php">
 											<p>Выберите кого выгнать</p>
+											<p id="sucses2">Пользователи успешно удалены из беседы</p>
 											<?php
 
 											foreach($_SESSION['niks'] as $nik){
@@ -110,10 +114,6 @@
 									$niks = $niks . $nik . " ,";
 								}?>
 								<p style="display: none;" id="niksInSesion"><?php echo $niks;?></p>
-								<?php
-								echo "<pre>";
-								var_dump($_SESSION);
-								echo "</pre>";?>
 								<p>какой то текст</p>
 								<p>какой то текст</p>
 								<p>какой то текст</p>

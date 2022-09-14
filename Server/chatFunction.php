@@ -17,7 +17,6 @@ if(mysqli_num_rows($result)){
 	}else{
 		$_SESSION['admin_chat'] = false;
 	}
-	echo "molodec razraby tebe po ebaly davati ne budet";
 	$query = "SELECT user_id FROM party WHERE chat_id='$getURL'";
 	$result_id = mysqli_query($connection, $query) or die(mysqli_error($connection));
 	$num = mysqli_num_rows($result_id);
@@ -34,6 +33,7 @@ if(mysqli_num_rows($result)){
 }
 else{
 	echo "ti pidoras? wishel nahui iz chuzoi komnaty";
+	header("Location: /../profile.php");
 }
 
 ?>

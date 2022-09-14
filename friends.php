@@ -23,7 +23,10 @@
 					<p><img src="img/prof-icon.png" alt="" width="30" height="30" class="d-inline-block align-text-top">
 					Профиль</p>
 				</a>
-				<a class="navbar-brand" href="messenger.php"><p>Сообщения</p></a>
+				<a class="navbar-brand" href="messange.php"><p>Сообщения</p></a>
+				<form method="post" action="Server/Out.php">
+					<button id="btnOut" type="submit" class="btn btn-primary mb-3 ps-4 pe-4"> Выход </button>
+				</form>
 			</div>
 		</nav>
 		<hr>

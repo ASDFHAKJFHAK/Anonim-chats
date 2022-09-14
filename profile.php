@@ -25,6 +25,9 @@
 					Сообщения</p>
 				</a>
 				<a class="navbar-brand" href="friends.php"><p>Чаты</p></a>
+				<form method="post" action="Server/Out.php">
+					<button id="btnOut" type="submit" class="btn btn-primary mb-3 ps-4 pe-4"> Выход </button>
+				</form>
 			</div>
 		</nav>
 		<hr>
@@ -55,9 +58,6 @@
 								<?php 
 								if(isset($_SESSION)){
 									echo "<p class='text-danger'>{$_SESSION['error']}</p>";
-									echo "<pre>";
-									var_dump($_SESSION);
-									echo "</pre>";
 								}
 								?>
 								<form id="form" style="max-width: 300px;" class="w-100" method="post" action="Server/.php">
