@@ -15,6 +15,7 @@
 	session_start();
 	require("Server/chatFunction.php") 
 	?>
+	<script src="js/js.js"></script>
 	<title>messenger</title>
 </head>
 <body style="overflow: hidden;">
@@ -58,6 +59,8 @@
 									<p id="newChat"></p>
 									<p id="sucses">Чат успешно расширен</p>
 									<p style="display: none;" id="login"><?php echo $_SESSION['login']; ?></p>
+									<p style="display: none;" id="user_id"><?php echo $_SESSION['user_id']; ?></p>
+									<p style="display: none;" id="chat_id"><?php echo $_SESSION['this_chat']; ?></p>
 									<form id="form2" style="max-width: 300px;" class="w-100" method="post">
 										<div id="container">
 											<div class="mb-3">
@@ -106,54 +109,39 @@
 								</div>
 							</div>
 						</div>
+						<?php 
+						$niks = "";
+						foreach ($_SESSION['niks'] as $nik){
+							$niks = $niks . $nik . " ,";
+						}?>
+						<p style="display: none;" id="niksInSesion"><?php echo $niks;?></p>
 						<div id="block" class="chat-messages">
-							<div class="chat-messages__content" id="messages">
-								<?php 
-								$niks = "";
-								foreach ($_SESSION['niks'] as $nik){
-									$niks = $niks . $nik . " ,";
-								}?>
-								<p style="display: none;" id="niksInSesion"><?php echo $niks;?></p>
-								<p>какой то текст</p>
-								<p>какой то текст</p>
-								<p>какой то текст</p>
-								<p>какой то текст</p>
-								<p>какой то текст</p>
-								<p>какой то текст</p>
-								<p>какой то текст</p>
-								<p>какой то текст</p>
-								<p>какой то текст</p>
-								<p>какой то текст</p>
-								<p>какой то текст</p>
-								<p>какой то текст</p>
-								<p>какой то текст</p>
-								<p>какой то текст</p>
-								<p>какой то текст</p>
-								<p>какой то текст</p>
-								<p>какой то текст</p>
-								<p>какой то текст</p>
-								<p>какой то текст</p>
-								<p>какой то текст</p>
-								<p>какой то текст</p>
-								<p>какой то текст</p>
-								<p>какой то текст</p>
-								<p>какой то текст</p>
-								<p>какой то текст</p>
-								<p>какой то текст</p>
-								<p>какой то текст</p>
-								<p>какой то текст</p>
-								<p>какой то текст</p>
-								<p>какой то текст</p>
-								<p>какой то текст</p>
-								<p>какой то текст</p>
-								<p>какой то текст</p>
-								<p>какой то текст</p>
-								<p>какой то текст</p>
-								<p>какой то текст</p>
+							<div id="output" class="chat-messages__content" id="messages">
+								<?php
+								$query = "SELECT user_id, content, time FROM message WHERE chat_id='$getURL'";
+								$result = mysqli_query($connection, $query) or die(mysqli_error($connection));
+								$numRows = mysqli_num_rows($result);
+								$score = 50;
+								if($numRows > 0){
+									if ($numRows < 50) {
+										$score = $numRows;
+									}
+									for(; $score > 0; $score--){
+										$message = mysqli_fetch_assoc($result);
+										$query_login = "SELECT login FROM user WHERE id ='{$message['user_id']}'";
+										$result_login = mysqli_query($connection, $query_login) or die(mysqli_error($connection));
+										$login = mysqli_fetch_assoc($result_login)['login'];
+										echo "<p>{$message['time']}</p>";
+										echo "<h3>{$login}</h3>";
+										echo "<p>{$message['content']}</p>";
+									}
+								}
+								?>
+
 							</div>
 						</div>
 						<form method="post" id="chat-form">
-							<input type="text" class='chat-form__input' placeholder='Введите сообщение'> <input type='submit' class='chat-form__submit' value='➤'>
+							<input id="input" type="text" class='chat-form__input' placeholder='Введите сообщение'> <input type='submit' id="set" class='chat-form__submit' value='➤'>
 						</form>
 					</div>
 

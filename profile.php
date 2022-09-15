@@ -60,7 +60,7 @@
 									echo "<p class='text-danger'>{$_SESSION['error']}</p>";
 								}
 								?>
-								<form id="form" style="max-width: 300px;" class="w-100" method="post" action="Server/.php">
+								<form id="form" style="max-width: 300px;" class="w-100" method="post" action="Server/swichPasword.php">
 
 									<div class="mb-3">
 										<label for="exampleInputName" class="form-label">Старый пароль</label>

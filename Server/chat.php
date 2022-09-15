@@ -12,7 +12,7 @@ use MyApp\Chat;
 session_start();
 // require ('profile.php');
 require '../vendor/autoload.php';
-require('function.php');
+// require('function.php');
 
 
 class Chat implements MessageComponentInterface {
@@ -29,15 +29,20 @@ class Chat implements MessageComponentInterface {
         echo "New connection! ({$conn->resourceId})\n";
     }
 
-    public function onMessage(ConnectionInterface $from, $msg) {
+    public function onMessage(ConnectionInterface $from, $data) {
         $numRecv = count($this->clients) - 1;
-        echo $msg = $this->clients->$_SESSION['login'] . $msg;
-        echo sprintf('Connection %d sending message "%s" to %d other connection%s' . "\n", $from->resourceId, $msg, $numRecv, $numRecv == 1 ? '' : 's');
+        echo sprintf('Connection %d sending message "%s" to %d other connection%s' . "\n", $from->resourceId, $data, $numRecv, $numRecv == 1 ? '' : 's');
         foreach ($this->clients as $client) {
 
             // if ($from !== $client) {
                 // The sender is not the receiver, send to each client connected
-                $client->send($msg);
+            $dataFromBd = json_decode($data);
+            $dataFromBd->time = date("Y-m-d H:i:s");
+            $client->send(json_encode($dataFromBd));
+
+            $connection = mysqli_connect('localhost', 'root');
+            $select = mysqli_select_db($connection, 'chat');
+            mysqli_query($connection, "INSERT INTO `message` (user_id, chat_id, content, time) VALUES ('$dataFromBd->user_id' , '$dataFromBd->chat_id' , '$dataFromBd->msg' ,'$dataFromBd->time' )");
             // }
         }
     }
@@ -57,12 +62,12 @@ class Chat implements MessageComponentInterface {
 }
 
 $server = IoServer::factory(
-        new HttpServer(
-            new WsServer(
-                new Chat()
-            )
-        ),
-        8656
-    );
+    new HttpServer(
+        new WsServer(
+            new Chat()
+        )
+    ),
+    8656
+);
 
-    $server->run();
+$server->run();
