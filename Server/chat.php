@@ -32,17 +32,20 @@ class Chat implements MessageComponentInterface {
     public function onMessage(ConnectionInterface $from, $data) {
         $numRecv = count($this->clients) - 1;
         echo sprintf('Connection %d sending message "%s" to %d other connection%s' . "\n", $from->resourceId, $data, $numRecv, $numRecv == 1 ? '' : 's');
+        
+        $dataFromBd = json_decode($data);
+        $dataFromBd->time = date("Y-m-d H:i:s");
+        $connection = mysqli_connect('localhost', 'root');
+        $select = mysqli_select_db($connection, 'chat');
+        mysqli_query($connection, "INSERT INTO `message` (user_id, chat_id, content, time) VALUES ('$dataFromBd->user_id' , '$dataFromBd->chat_id' , '$dataFromBd->msg' ,'$dataFromBd->time' )");
+
         foreach ($this->clients as $client) {
 
             // if ($from !== $client) {
                 // The sender is not the receiver, send to each client connected
-            $dataFromBd = json_decode($data);
-            $dataFromBd->time = date("Y-m-d H:i:s");
+
             $client->send(json_encode($dataFromBd));
 
-            $connection = mysqli_connect('localhost', 'root');
-            $select = mysqli_select_db($connection, 'chat');
-            mysqli_query($connection, "INSERT INTO `message` (user_id, chat_id, content, time) VALUES ('$dataFromBd->user_id' , '$dataFromBd->chat_id' , '$dataFromBd->msg' ,'$dataFromBd->time' )");
             // }
         }
     }

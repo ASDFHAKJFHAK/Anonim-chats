@@ -2,7 +2,7 @@
  	let input = document.getElementById('input');
  	let btn = document.getElementById('set');
  	let output = document.getElementById('output');
-
+ 	let el = document.getElementById("block");
  	let login_html = document.getElementById('login');
  	let user_id_html = document.getElementById('user_id');
  	let chat_id_html = document.getElementById('chat_id');
@@ -29,6 +29,7 @@
  		let createMsg = document.createElement('p');
  		createMsg.innerHTML = `${data.msg}`;
  		output.append(createMsg);
+ 		el.scrollTop = Math.ceil(el.scrollHeight - el.clientHeight);
  	};
 
  	btn.onclick = function(event) {

@@ -118,7 +118,9 @@
 						<div id="block" class="chat-messages">
 							<div id="output" class="chat-messages__content" id="messages">
 								<?php
-								$query = "SELECT user_id, content, time FROM message WHERE chat_id='$getURL'";
+								$arr = array();
+								$last_id = 0;
+								$query = "SELECT id, user_id, content, time FROM message WHERE chat_id='$getURL' ORDER BY id DESC LIMIT 7";
 								$result = mysqli_query($connection, $query) or die(mysqli_error($connection));
 								$numRows = mysqli_num_rows($result);
 								$score = 50;
@@ -131,10 +133,13 @@
 										$query_login = "SELECT login FROM user WHERE id ='{$message['user_id']}'";
 										$result_login = mysqli_query($connection, $query_login) or die(mysqli_error($connection));
 										$login = mysqli_fetch_assoc($result_login)['login'];
-										echo "<p>{$message['time']}</p>";
-										echo "<h3>{$login}</h3>";
-										echo "<p>{$message['content']}</p>";
+										array_push($arr, "<p>{$message['time']}</p><h3>{$login}</h3><p>{$message['content']}</p>");
+										$last_id = $message['id'];
 									}
+									for($i = count($arr) - 1; $i >= 0; $i--){
+										echo $arr[$i];
+									}
+									echo "<p style='display: none;' id='last_id'>$last_id</p>";
 								}
 								?>
 
@@ -155,5 +160,33 @@
 
 <script>
 	var block = document.getElementById("block");
+	let blocedCall = false;
 	block.scrollTop = block.scrollHeight;
+	block.addEventListener('scroll', function() {
+		if(block.scrollTop == 0 && blocedCall == false){
+			$.ajax({
+				url: "../Server/GetOldMsg.php",
+				type: "POST",
+				data: {
+					lastId: document.getElementById("last_id").innerText,
+					url: document.getElementById("chat_id").innerText
+				},
+				success: (res) => {
+					if(res != 0){
+						data = JSON.parse(res);
+						document.getElementById("last_id").innerText = data[data.length - 1];
+						var blockMsg = document.getElementById("output");
+						for(var i = 0, length1 = data.length - 1; i < length1; i++){
+							let createTime = document.createElement('p');
+							createTime.innerHTML = data[i]
+							blockMsg.prepend(createTime);
+						}
+					}else {
+						blocedCall = true;
+					}
+				}
+			})
+		}
+	});
+console.dir(block);
 </script>
