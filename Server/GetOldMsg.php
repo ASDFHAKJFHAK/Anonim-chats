@@ -4,7 +4,7 @@ require('function.php');
 $getURL = trim(urldecode(htmlspecialchars($_POST['url'])));
 $arr = array();
 $last_id = trim(urldecode(htmlspecialchars($_POST['lastId'])));
-$query = "SELECT id, user_id, content, time FROM message WHERE chat_id='$getURL' and id < $last_id ORDER BY id DESC LIMIT 5";
+$query = "SELECT id, user_id, content, time FROM message WHERE chat_id='$getURL' and id < $last_id ORDER BY id DESC LIMIT 20";
 $result = mysqli_query($connection, $query) or die(mysqli_error($connection));
 $numRows = mysqli_num_rows($result);
 $score = 50;

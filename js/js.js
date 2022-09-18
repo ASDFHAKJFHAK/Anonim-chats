@@ -14,39 +14,38 @@
  	var conn = new WebSocket('ws://127.0.0.1:8656');
  	conn.onopen = function(e) {
  		console.log("Connection established!");
- 	};
+        conn.send(JSON.stringify({ "newRoom": chat_id}));
+    };
 
- 	conn.onmessage = function(e) {
- 		console.log(e.data);
- 		let data = JSON.parse(e.data);
- 		console.log(e.data);
- 		let createTime = document.createElement('p');
- 		createTime.innerHTML = `${data.time}`;
- 		output.append(createTime);
- 		let createLogin = document.createElement('h3');
- 		createLogin.innerHTML = `${data.login}`;
- 		output.append(createLogin);
- 		let createMsg = document.createElement('p');
- 		createMsg.innerHTML = `${data.msg}`;
- 		output.append(createMsg);
- 		el.scrollTop = Math.ceil(el.scrollHeight - el.clientHeight);
- 	};
+    conn.onmessage = function(e) {
+     let data = JSON.parse(e.data);
+     // ДЛЯ ФРОНТЕРОВ ТРОГАТЬ ТОЛЬКО ЗДЕСЬ ТУТ СОЗДАЮТЬСЯ НОВЫЕ СООБЩЕНИЯ ТОЛЬКО ЗДЕСЬ МОЖНО СТИЛИ ДОПИСАТЬ
+     let createTime = document.createElement('p');
+     createTime.innerHTML = `${data.time}`;
+     output.append(createTime);
+     let createLogin = document.createElement('h3');
+     createLogin.innerHTML = `${data.login}`;
+     output.append(createLogin);
+     let createMsg = document.createElement('p');
+     createMsg.innerHTML = `${data.msg}`;
+     output.append(createMsg);
+ };
 
- 	btn.onclick = function(event) {
- 		event.preventDefault();
- 		let data = JSON.stringify({ "login": login, "user_id": user_id, "chat_id": chat_id, "msg": input.value});
- 		console.dir(data);
- 		conn.send(data);
- 		input.value = "";
- 	};
+ btn.onclick = function(event) {
+     event.preventDefault();
+     let data = JSON.stringify({ "login": login, "user_id": user_id, "chat_id": chat_id, "msg": input.value});
+     conn.send(data);
+     input.value = "";
+     setTimeout(() => {el.scrollTop = Math.ceil(el.scrollHeight - el.clientHeight)}, 200);
+ };
 
- 	input.addEventListener('keydown', function(e) {
- 		if (e.keyCode === 13 && this.value != "") {
- 			e.preventDefault();
- 			let data = JSON.stringify({ "login": login, "user_id": user_id, "chat_id": chat_id, "msg": input.value});
- 			console.dir(data);
- 			conn.send(data);
- 			input.value = "";
- 		}
- 	});
- }
+ input.addEventListener('keydown', function(e) {
+     if (e.keyCode === 13 && this.value != "") {
+        e.preventDefault();
+        let data = JSON.stringify({ "login": login, "user_id": user_id, "chat_id": chat_id, "msg": input.value});
+        conn.send(data);
+        input.value = "";
+        setTimeout(() => {el.scrollTop = Math.ceil(el.scrollHeight - el.clientHeight)}, 200);
+    }
+});
+}

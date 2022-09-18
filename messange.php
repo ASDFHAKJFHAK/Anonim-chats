@@ -120,7 +120,7 @@
 								<?php
 								$arr = array();
 								$last_id = 0;
-								$query = "SELECT id, user_id, content, time FROM message WHERE chat_id='$getURL' ORDER BY id DESC LIMIT 7";
+								$query = "SELECT id, user_id, content, time FROM message WHERE chat_id='$getURL' ORDER BY id DESC LIMIT 20";
 								$result = mysqli_query($connection, $query) or die(mysqli_error($connection));
 								$numRows = mysqli_num_rows($result);
 								$score = 50;

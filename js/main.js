@@ -1,6 +1,6 @@
 $(function() {
 
-
+	// ДЛЯ ФРОНТЕРОВ ТРОГАТЬ ТОЛЬКО ТО ЧТО ПОХОЖЕ НА HTML !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 	let batton = undefined;
 	let admin = false;
 	let chekBtn = false;
