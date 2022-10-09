@@ -43,7 +43,7 @@ $(function() {
 			$('#niks').text(niks).show(1000);
 			num2 = !num2;
 		} else {
-			$('#niks').hide();
+			$('#niks').hide(1000);
 			num2 = false;
 		}
 
@@ -141,7 +141,7 @@ $(function() {
 						}
 					}
 					if (flag == false) {
-						$('#newChat').append(`<p class="delit">Чат не удалось пополгить</p>`);
+						$('#newChat').append(`<p class="delit">Чат не удалось пополнить</p>`);
 						$('#newChat').append(`<p class="delit">Нет пользователей с ником ${str}</p>`);
 					} else {
 						$('#newChat').append(`<p class="delit">Чат пополнен но не все пользователи добавлены</p>`);

@@ -52,8 +52,8 @@
 							<div id="clickButton" class=" col-12  border" style="position: absolute; background-color: #171624;">
 								<div class="d-flex justify-content-center flex-wrap">
 									<p id="niks"></p>
-									<button id="members" class="btn btn-secondary m-2 me-0 w-33">Участники</button>
-									<button class="btn btn-success m-2 me-0 w-33" id='newChat'>Добавить</button>
+									<button id="members" class="btn btn-secondary m-2 me-0 w-33" style="height: 38px">Участники</button>
+									<button class="btn btn-success m-2 me-0 w-33" id='newChat' style="height:38px">Добавить</button>
 
 
 									<p id="newChat"></p>
@@ -61,7 +61,7 @@
 									<p style="display: none;" id="login"><?php echo $_SESSION['login']; ?></p>
 									<p style="display: none;" id="user_id"><?php echo $_SESSION['user_id']; ?></p>
 									<p style="display: none;" id="chat_id"><?php echo $_SESSION['this_chat']; ?></p>
-									<form id="form2" style="max-width: 300px;" class="w-100" method="post">
+									<form id="form2" style="max-width: 300px;" class="w-100 ms-2" method="post">
 										<div id="container">
 											<div class="mb-3">
 												<label for="exampleInputPassword1" class="form-label">Никнейм участника</label>
@@ -75,7 +75,7 @@
 										<button id="offForm2" class="btn btn-primary mb-3 ps-4 pe-4"> Отмена </button>
 
 									</form>
-									<div id="box">
+									<div id="box" class="w-33">
 										<form id="qwestions" method="post" action="Server/outChat.php">
 											<p>Вы точно хотите выйти из беседы?</p>
 											<button id="btnOut" type="submit" class="btn btn-primary mb-3 ps-4 pe-4"> Да </button>
@@ -99,10 +99,10 @@
 										<?php 
 										if ($_SESSION['admin_chat'] == true) {
 
-											echo '<button id="delit" class="btn btn-danger m-2 me-0 w-33">Удалить</button>';
+											echo '<button id="delit" class="btn btn-danger m-2 me-0"; style = "width: 100%">Удалить</button>';
 
 										} else{
-											echo '<button id="out" class="btn btn-danger m-2 me-0 w-33">Выйти из беседы</button>';
+											echo '<button id="out" class="btn btn-danger m-2 me-0 ">Выйти из беседы</button>';
 										}
 										?>
 									</div>
@@ -188,5 +188,5 @@
 			})
 		}
 	});
-console.dir(block);
+	console.dir(block);
 </script>
