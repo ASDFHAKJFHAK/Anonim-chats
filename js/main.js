@@ -141,8 +141,8 @@ $(function() {
 						}
 					}
 					if (flag == false) {
-						$('#newChat').append(`<p class="delit">Чат не удалось пополнить</p>`);
-						$('#newChat').append(`<p class="delit">Нет пользователей с ником ${str}</p>`);
+						$('#newChat').append(`<p class="delit ms-2">Чат не удалось пополнить</p>`);
+						$('#newChat').append(`<p class="delit ms-2">Нет пользователей с ником ${str}</p>`);
 					} else {
 						$('#newChat').append(`<p class="delit">Чат пополнен но не все пользователи добавлены</p>`);
 						$('#newChat').append(`<p class="delit">Нет пользователей с ником ${str}</p>`);

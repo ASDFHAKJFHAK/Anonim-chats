@@ -51,10 +51,12 @@
 						<div class="d-flex justify-content-center" style="position: relative;">
 							<div id="clickButton" class=" col-12  border" style="position: absolute; background-color: #171624;">
 								<div class="d-flex justify-content-center flex-wrap">
-									<p id="niks"></p>
+									
 									<button id="members" class="btn btn-secondary m-2 me-0 w-33" style="height: 38px">Участники</button>
-									<button class="btn btn-success m-2 me-0 w-33" id='newChat' style="height:38px">Добавить</button>
-
+									<p id="niks" class="ms-2"></p>
+									<div class="w-33" id="newChat">
+										<button class="btn btn-success m-2 me-0" id='newChat' style="height:38px; width: 94%;">Добавить</button>
+									</div>
 
 									<p id="newChat"></p>
 									<p id="sucses">Чат успешно расширен</p>
@@ -76,6 +78,15 @@
 
 									</form>
 									<div id="box" class="w-33">
+										<?php 
+										if ($_SESSION['admin_chat'] == true) {
+
+											echo '<button id="delit" class="btn btn-danger m-2 me-0"; style = "width: 100%">Удалить</button>';
+
+										} else{
+											echo '<button id="out" class="btn btn-danger m-2 me-0 ">Выйти из беседы</button>';
+										}
+										?>
 										<form id="qwestions" method="post" action="Server/outChat.php">
 											<p>Вы точно хотите выйти из беседы?</p>
 											<button id="btnOut" type="submit" class="btn btn-primary mb-3 ps-4 pe-4"> Да </button>
@@ -88,7 +99,7 @@
 
 											foreach($_SESSION['niks'] as $nik){
 												if($nik != $_SESSION['login']){
-													echo "<input type='checkbox' name='chek' value='{$nik}'><p>$nik</p>";
+													echo "<div class='d-flex'><input type='checkbox' name='chek' value='{$nik}'><p class='ms-2'>$nik</p></div>";
 												}
 											}
 											?>
@@ -96,15 +107,7 @@
 											<button id="btnDel"  class="btn btn-primary mb-3 ps-4 pe-4"> Удалить </button>
 											<button id="allDelit" type="submit" class="btn btn-primary mb-3 ps-4 pe-4"> Удалить всю беседу </button>
 										</form>
-										<?php 
-										if ($_SESSION['admin_chat'] == true) {
-
-											echo '<button id="delit" class="btn btn-danger m-2 me-0"; style = "width: 100%">Удалить</button>';
-
-										} else{
-											echo '<button id="out" class="btn btn-danger m-2 me-0 ">Выйти из беседы</button>';
-										}
-										?>
+										
 									</div>
 								</div>
 							</div>
