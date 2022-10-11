@@ -35,20 +35,22 @@ class Chat implements MessageComponentInterface {
         $numRecv = count($this->clients) - 1;
         echo sprintf('Connection %d sending message "%s" to %d other connection%s' . "\n", $from->resourceId, $data, $numRecv, $numRecv == 1 ? '' : 's');
 
-
         $dataFromBd = json_decode($data);
         // Этот блок срабатывает при открытии соединения
         if (isset($dataFromBd->newRoom)) {
             $this->rooms[$dataFromBd->newRoom][$from->resourceId] = $from;
             $this->users[$from->resourceId] = $dataFromBd->newRoom;
         }else{
+
             // а этот при отправке сообшений
             $dataFromBd->time = date("Y-m-d H:i:s");
             $connection = mysqli_connect('localhost', 'root');
             $select = mysqli_select_db($connection, 'chat');
+
             mysqli_query($connection, "INSERT INTO `message` (user_id, chat_id, content, time) VALUES ('$dataFromBd->user_id' , '$dataFromBd->chat_id' , '$dataFromBd->msg' ,'$dataFromBd->time' )");
 
             $room = $this->users[$from->resourceId];
+
             foreach($this->rooms[$room] as $client){
                 $client->send(json_encode($dataFromBd));
             }

@@ -38,9 +38,7 @@
 			<div class="row">
 
 
-				<?php foreach($_SESSION['chat_name'] as $key => $name) {
-					// code...
-					?>
+				<?php foreach($_SESSION['chat_name'] as $key => $name) { ?>
 					<!-- cообщества -->
 					<a href="messange.php?id=<?php echo $_SESSION['chats'][$key]; ?>"> asdafa</a>
 					<div class=" col-10 mt-3 border"> 

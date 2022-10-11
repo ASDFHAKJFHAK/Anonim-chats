@@ -12,9 +12,12 @@ if(isset($_POST['login']) && isset($_POST['password']) && isset($_POST['key_inva
 	$email = trim(urldecode(htmlspecialchars($_POST['email'])));
 	$password = trim(urldecode(htmlspecialchars($_POST['password'])));
 
+	$passwordHash = password_hash($password, PASSWORD_DEFAULT);
+
 	// ОПТИМИЗАЦИЯ ПЕРВАЯ OCHERED
 	$query = "SELECT * FROM user WHERE login='$login' or email='$email'";
 	$chekResult = mysqli_query($connection, $query) or die(mysqli_error($connection));
+	
 	if(mysqli_num_rows($chekResult)){
 		$_SESSION['error'] = 'Уже существует такой логин или почта';
 		header("Location: /../index.php");
@@ -34,7 +37,7 @@ if(isset($_POST['login']) && isset($_POST['password']) && isset($_POST['key_inva
 				$pass = bin2hex(openssl_random_pseudo_bytes(4));
 
 				mysqli_query($connection, "UPDATE `user` SET `key_valid` ='$user_info2' WHERE `id` = '$user_info1' ");
-				mysqli_query($connection, "INSERT INTO `user` (login, email, password, invate_id, key_invate) VALUES ('$login' , '$email' , '$password' , $user_info1, '$pass')");
+				mysqli_query($connection, "INSERT INTO `user` (login, email, password, invate_id, key_invate) VALUES ('$login' , '$email' , '$passwordHash' , $user_info1, '$pass')");
 
 				setcookie("login", $login, time()+60*60*24*30,  '/');
 				setcookie("password", $password, time()+60*60*24*30,  '/');
